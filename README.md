@@ -27,3 +27,13 @@ automated parameter selection feature as nice-to-have. Another, more straightfor
 potentially challenging problem is configuring plots to scale properly based on results. Finally,
 the list of criteria we will need to include for data validation is fairly long, so we believe
 it will take some time to get validation to function reliably.
+
+## Communication
+We plan to use Zoom/Teams and emails to collaborate, which should work well with tackling discrete 
+modules of the coding. Integration and testing of the modules may prove to be challenging remotely. 
+If necessary, we are local to each other so we could meet for a working session.  
+
+## Use of Branches
+We plan to set up our repository with a main branch to which we will both commit, since we're each 
+going to be working on separate classes. However, will use sub-branches off the main, one for each 
+of us, to work on and test our classes before before combining them.
