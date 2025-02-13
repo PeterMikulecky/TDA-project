@@ -4,9 +4,10 @@ import persistence_analyzer
 import visualizer
 
 def main():
-    # Placeholder for user input for file paths
-    file1_path = "path/to/file1.csv"
-    file2_path = "path/to/file2.csv"
+   
+    #User input for file paths
+    file1_path = input("Enter path to first data file:")
+    file2_path = input("Enter path to second data file:")
 
     # Validate the files
     validator = data_validator.Validation(file1_path, file2_path)
