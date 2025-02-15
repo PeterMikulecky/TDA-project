@@ -5,19 +5,19 @@ import visualizer
 
 def main():
    
-    #User input for file paths
+    # User input for file paths
     file1_path = input("Enter path to first data file:")
     file2_path = input("Enter path to second data file:")
+
+    # User input for dimension and lag parameters
+    dimension = int(input("Enter an integer dimension parameter: "))
+    lag = int(input("Enter an integer lag parameter: "))
 
     # Validate the files
     validator = data_validator.Validation(file1_path, file2_path)
     if not validator.validate_files():
         print("Invalid files")
         return
-
-    # Placeholder for user input for dimension and lag parameters
-    dimension = 3
-    lag = 2
 
     # Generate time lag embedding for both timeseries
     timeseries1 = []  # Placeholder for loaded timeseries data
