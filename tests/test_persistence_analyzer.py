@@ -22,8 +22,8 @@ class TestPersistenceAnalysis(unittest.TestCase):
         diagrams2 = self.analysis.generate_persistence_homology(self.point_cloud2)
         self.assertTrue(len(diagrams1) > 0)
         self.assertTrue(len(diagrams2) > 0)
-        
-    # Test Wasserstein distance calculator for ability to produce float output 
+
+    # Test Wasserstein distance calculator for ability to produce float output
     def test_compute_wasserstein_distance(self):
         diagrams1 = self.analysis.generate_persistence_homology(self.point_cloud1)
         diagrams2 = self.analysis.generate_persistence_homology(self.point_cloud2)
@@ -37,9 +37,11 @@ class TestPersistenceAnalysis(unittest.TestCase):
         bottleneck_dist = self.analysis.compute_bottleneck_distance(diagrams1, diagrams2)
         self.assertIsInstance(bottleneck_dist, float)
 
-    # Test compare_persistence_data mathod for ability to call preceding methods
+    # Test compare_persistence_data method for ability to call preceding methods
     def test_compare_persistence_data(self):
         wasserstein_dist, bottleneck_dist = self.analysis.compare_persistence_data()
+        print("Wasserstein Distance:", wasserstein_dist)
+        print("Bottleneck Distance:", bottleneck_dist)
         self.assertIsInstance(wasserstein_dist, float)
         self.assertIsInstance(bottleneck_dist, float)
 
