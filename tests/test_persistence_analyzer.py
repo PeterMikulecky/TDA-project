@@ -1,6 +1,11 @@
 # Unit tests for persistence_analyzer class
 import unittest
 import numpy as np
+import sys
+import os
+
+# Add the 'src' directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 from persistence_analyzer import PersistenceAnalysis
 
 # Class containing unittest test cases
