@@ -43,5 +43,5 @@ class Validation:
         return True, "Data is valid."
 
 # Example usage:
-validator = Validation('DataFile1.csv', 'DataFile2.csv', 10, 100)
-print(validator.validate_files())
+#validator = Validation('DataFile1.csv', 'DataFile2.csv', 10, 100)
+#print(validator.validate_files())
