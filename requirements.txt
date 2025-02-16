@@ -1,6 +1,8 @@
 python==3.12.3
 matplotlib==3.10.0
-numpy==2.2.2
+numpy==1.26.4
 scikit-tda==1.1.1
 scipy==1.15.1
 pandas==2.2.3
+giotto-ph==0.2.4
+giotto-tda==0.6.2
