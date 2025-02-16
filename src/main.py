@@ -3,15 +3,27 @@ import delay_embedder
 import persistence_analyzer
 import visualizer
 
+# Define function to get validated dimension and lag parameters from user
+def get_dimension_and_lag(input_func=input):
+    while True:
+        try:
+            dimension = int(input_func("Enter a positive integer dimension parameter: "))
+            lag = int(input_func("Enter a positive integer lag parameter: "))
+            if dimension <= 0 or lag <= 0:
+                print("Both dimension and lag must be positive integers. Please try again.")
+            else:
+                return dimension, lag
+        except ValueError:
+            print("Invalid input. Please enter an integer value.")
+
 def main():
    
     # User input for file paths
     file1_path = input("Enter path to first data file:")
     file2_path = input("Enter path to second data file:")
 
-    # User input for dimension and lag parameters
-    dimension = int(input("Enter an integer dimension parameter: "))
-    lag = int(input("Enter an integer lag parameter: "))
+    # Get user-provided dimension and lag parameters
+    dimension, lag = get_dimension_and_lag()
 
     # Validate the files
     validator = data_validator.Validation(file1_path, file2_path)
