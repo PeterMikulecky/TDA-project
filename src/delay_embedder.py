@@ -9,9 +9,10 @@ class DelayEmbedding:
         self.dimension = dimension
         self.lag = lag
         self.embeddings = None
-
+        
     def generate_embedding(self):
-        embedding = SingleTakensEmbedding(time_delay=self.lag, dimension=self.dimension)
+        self.timeseries = np.array(self.timeseries)  # Convert timeseries to a NumPy array
+        embedding = SingleTakensEmbedding(parameters_type='fixed', time_delay=self.lag, dimension=self.dimension)
         self.embeddings = embedding.fit_transform(self.timeseries.reshape(-1, 1))
         return self.embeddings
 
