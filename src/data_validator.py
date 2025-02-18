@@ -1,7 +1,7 @@
 import pandas as pd
 
 class Validation:
-    def __init__(self, file1_path, file2_path, min_rows, max_rows):
+    def __init__(self, file1_path, file2_path, min_rows=100, max_rows=10000):
         self.file1_path = file1_path
         self.file2_path = file2_path
         self.min_rows = min_rows
