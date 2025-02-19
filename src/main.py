@@ -59,18 +59,18 @@ def main():
     embedding2 = delay_embedder.DelayEmbedding(timeseries2, dimension, lag).generate_embedding()
 
     # Generate persistence homology and compare
-    print("Calculating persistence homology...\n")
     persistence_analysis = persistence_analyzer.PersistenceAnalysis(embedding1, embedding2)
-    print("Calculating distance metrics...\n")
     wasserstein_dist, bottleneck_dist = persistence_analysis.compare_persistence_data()
 
     # Visualization
+    print("Generating plots and saving to the application's local directory...\n")
     visualization = visualizer.Visualization()
     visualization.plot_point_cloud(embedding1)
     visualization.plot_point_cloud(embedding2)
     visualization.plot_persistence_homology(persistence_analysis.diagrams1)
     visualization.plot_persistence_homology(persistence_analysis.diagrams2)
     visualization.plot_distances(wasserstein_dist, bottleneck_dist)
+    print("Thanks for using the Topological Data Analysis Visualizer!")
 
 if __name__ == "__main__":
     main()
