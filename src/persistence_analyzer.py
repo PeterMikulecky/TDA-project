@@ -26,10 +26,13 @@ class PersistenceAnalysis:
         return persim.bottleneck(diagrams1_flat, diagrams2_flat, matching=False)
 
     def compare_persistence_data(self):
+        print("Working on persistence diagram for timeseries 1...\n")
         self.diagrams1 = self.generate_persistence_homology(self.point_cloud1)
+        print("Working on persistence diagram for timeseries 2...\n")
         self.diagrams2 = self.generate_persistence_homology(self.point_cloud2)
-        
+        print("Calculating Wasserstein distance. UserWarnings are expected. This could take a few minutes...\n")
         wasserstein_dist = self.compute_wasserstein_distance(self.diagrams1, self.diagrams2)
+        print("Calculating Bottleneck distance. UserWarnings are expected. This could take a few minutes...\n")
         bottleneck_dist = self.compute_bottleneck_distance(self.diagrams1, self.diagrams2)
 
         return wasserstein_dist, bottleneck_dist
