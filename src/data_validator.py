@@ -1,5 +1,9 @@
 import pandas as pd
 
+# Validation that user-supplied data files are properly formatted for processing
+# Example usage:
+#     validator = Validation('DataFile1.csv', 'DataFile2.csv', 10, 100)
+
 class Validation:
     def __init__(self, file1_path, file2_path, min_rows=100, max_rows=10000):
         self.file1_path = file1_path
@@ -7,6 +11,7 @@ class Validation:
         self.min_rows = min_rows
         self.max_rows = max_rows
 
+    # Validataion that both files are readable and that the data has passed various format tests 
     def validate_files(self):
         try:
             data1 = pd.read_csv(self.file1_path)
@@ -14,6 +19,7 @@ class Validation:
         except Exception as e:
             return f"Error reading files: {e}"
 
+        # Call to validate_data to test file format conforms to requirements, returning appropriate message for each case
         valid1, msg1 = self.validate_data(data1)
         valid2, msg2 = self.validate_data(data2)
 
@@ -24,6 +30,7 @@ class Validation:
 
         return "Both files are successfully validated."
 
+    # Performs 5 checks to data to ensure they can be processed
     def validate_data(self, data):
         if len(data.columns) != 2:
             return False, "File must contain exactly two columns."
@@ -42,6 +49,3 @@ class Validation:
 
         return True, "Data is valid."
 
-# Example usage:
-#validator = Validation('DataFile1.csv', 'DataFile2.csv', 10, 100)
-#print(validator.validate_files())
