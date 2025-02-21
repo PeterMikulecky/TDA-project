@@ -1,4 +1,4 @@
-# Installation Instructions for Topological Data Analysis Visualizar Tool
+# Installation Instructions for Topological Data Analysis Visualizer Tool
 
 ## Prerequisites
 - Python 3.12.3

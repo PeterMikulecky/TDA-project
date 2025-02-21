@@ -97,4 +97,4 @@ persistence homology diagrams. Intuitively, the larger the Wasserstein distance,
 the more "work" is required to transform one persistence homology diagram into 
 the other. The bar chart normalizes this Wasserstein distance against the 
 standard deviation of persistence lifetimes observed in each diagram. This 
-allows one compare inter-diagram distance against intra-diagram variability.
+allows one to compare inter-diagram distance against intra-diagram variability.
