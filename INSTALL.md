@@ -1,7 +1,7 @@
 # Installation Instructions for Topological Data Analysis Visualizar Tool
 
 ## Prerequisites
-- Python 3.12.3https://github.com/PeterMikulecky/TDA-project or higher
+- Python 3.12.3
 - Virtualenv (optional but recommended)
 
 ## Installation Steps
@@ -13,8 +13,7 @@ git clonehttps://github.com/PeterMikulecky/TDA-project
 cd TDA-project
 ```
 
-### 2. create a virtual environment to isolate the project 
-dependencies and activate it. 
+### 2. Create a virtual environment to isolate the project dependencies and activate it. 
 
 On macOS/Linux, use the following commands:
 ```sh
@@ -37,8 +36,7 @@ pip install -r requirements.txt
 cd /TDA-project/src/
 ```
 
-### 5. Ensure you know the paths to the two .csv files containing 
-your time series data. See README.md for further details.
+### 5. Ensure you know the paths to the two .csv files containing  your time series data. See README.md for further details.
 
 ### 6. From within the /TDA-project/src/ directory, run the application:
 ```sh
