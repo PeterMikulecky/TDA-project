@@ -14,7 +14,10 @@ topological similarites of the two datasets. The tool outputs plots of the point
 persistence homololgy visualizations and the final distance metric.
 
 ## Team Members:
-Peter Mikulecky and Patrick Hudson 
+Peter Mikulecky and Patrick Hudson
+
+## Bugs, Feature Requests and Contribution:
+Please direct all such correspondence to pmikule1@asu.edu 
 
 ## Anticipated Challenges
 We think that the primary challenge will be determining default parameters for the TDA pipeline
