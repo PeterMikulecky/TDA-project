@@ -6,6 +6,15 @@ import persistence_analyzer
 import visualizer
 
 def get_dimension_and_lag(input_func=input):
+    """
+    Prompt the user to enter positive integer values for dimension and lag parameters.
+
+    Args:
+        input_func (function): Function to get input from the user, implements validation.
+
+    Returns:
+        tuple: A tuple containing two positive integers (dimension, lag).
+    """
     while True:
         try:
             dimension = int(input_func("Enter a positive integer dimension parameter: "))
@@ -18,6 +27,18 @@ def get_dimension_and_lag(input_func=input):
             print("Invalid input. Please enter an integer value.")
 
 def main():
+    """
+    Main function to execute the Topological Data Analysis Visualizer application.
+
+    Steps:
+        1. Prompt users for paths to two timeseries .csv files.
+        2. Get dimension and lag parameters from user.
+        3. Validate the timeseries data files.
+        4. Convert the second column (i.e., the signal) of each data file to numpy arrays.
+        5. Perform delay embedding on the time series data.
+        6. Perform persistence analysis on the embedded data.
+        7. Generate visualizations and save them to the local directory.
+    """
     file1_path = input("Enter path to first data file:")
     file2_path = input("Enter path to second data file:")
     dimension, lag = get_dimension_and_lag()
@@ -42,7 +63,7 @@ def main():
     with open(file2_path, 'r') as file2:
         reader = csv.reader(file2)
         next(reader)
-        for row in reader:
+        for row in reader):
             file2_second_column.append(row[1])
     timeseries2 = np.array(file2_second_column)
 
