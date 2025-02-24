@@ -9,7 +9,7 @@
 ### 1. Clone the Repository
 First, clone the repository to your local machine using git:
 ```sh
-git clonehttps://github.com/PeterMikulecky/TDA-project
+git clone https://github.com/PeterMikulecky/TDA-project
 cd TDA-project
 ```
 
