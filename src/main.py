@@ -63,7 +63,7 @@ def main():
     with open(file2_path, 'r') as file2:
         reader = csv.reader(file2)
         next(reader)
-        for row in reader):
+        for row in reader:
             file2_second_column.append(row[1])
     timeseries2 = np.array(file2_second_column)
 
@@ -73,7 +73,12 @@ def main():
     embedding2 = delay_embedder.DelayEmbedding(timeseries2, dimension, lag).generate_embedding()
 
     persistence_analysis = persistence_analyzer.PersistenceAnalysis(embedding1, embedding2)
-    wasserstein_dist, std_lifetimes1, std_lifetimes2 = persistence_analysis.compare_persistence_data()
+    persistence_analysis.diagrams1 = persistence_analysis.generate_persistence_homology(embedding1)
+    persistence_analysis.diagrams2 = persistence_analysis.generate_persistence_homology(embedding2)
+    
+    wasserstein_dist = persistence_analysis.compute_wasserstein_distance(persistence_analysis.diagrams1, persistence_analysis.diagrams2)
+    std_lifetimes1 = persistence_analysis.compute_std_lifetimes(persistence_analysis.diagrams1)
+    std_lifetimes2 = persistence_analysis.compute_std_lifetimes(persistence_analysis.diagrams2)
 
     print("Generating plots and saving to the application's local directory...\n")
     visualization = visualizer.Visualization()
