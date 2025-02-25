@@ -69,3 +69,11 @@ class PersistenceAnalysis:
             if len(dgm) > 0:
                 lifetime = dgm[:, 1] - dgm[:, 0]
                 finite_lifetimes = lifetime[np.isfinite(lifetime)]
+                lifetimes.extend(finite_lifetimes)
+
+        if lifetimes:
+            std_lifetimes = np.std(lifetimes)
+        else:
+            std_lifetimes = None
+
+        return std_lifetimes
