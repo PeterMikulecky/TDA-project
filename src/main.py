@@ -1,3 +1,58 @@
+"""
+main.py
+
+This is the main driver script for the TDA Time Series Visualizer package.
+
+The package offers a user-friendly way for non-specialist researchers to assess 
+whether their time series data might benefit from topological data analysis (TDA).
+
+This driver makes the app available from the CLI. For a GUI-driven interface, use
+the alternative driver, TDAVisualizerApp.py.
+
+Workflow:
+1. Prompt the user to provide paths to two CSV files, each containing two columns: 
+    timestep and signal data.
+2. Prompt the user to input parameters for dimension and lag.
+3. Validate the data in the provided files.
+4. Use the dimension and lag parameters to perform delay-embedding of the time 
+    series, producing point clouds.
+5. Subject the point clouds to persistence homology analysis to produce persistence
+    diagrams, highlighting the persistence of topological features across homology 
+    groups (H0: points, H1: holes, H2: volumes).
+6. Compare the persistence diagrams of the two time series by calculating the 
+    Wasserstein distance, normalized against the standard deviation of the 
+    persistence lifetimes of each persistence diagram.
+7. Output five plots, saving them to the source code directory:
+    - Point cloud for time series 1
+    - Point cloud for time series 2
+    - Persistence diagram for time series 1
+    - Persistence diagram for time series 2
+    - Wasserstein distance normalized against the lifetime standard deviation of 
+        each persistence diagram
+
+Dependencies:
+- data_validator.py: Validates the data in the provided CSV files.
+- delay_embedder.py: Delay-embeds the time series to produce point clouds.
+- persistence_analyzer.py: Analyzes the point clouds using persistence homology 
+    to produce persistence diagrams.
+- visualizer.py: Visualizes the point clouds and persistence diagrams, and 
+    calculates the Wasserstein distance.
+- other python packages from the PSL or installable by pip, as detailed in 
+    requirements.txt.
+
+Example:
+To run the script, from within /TDA-project/src/, use one of the following commands:
+    python main.py
+    python3 main.py
+
+Authors:
+    Peter Mikulecky and Patrick Hudson
+
+Date:
+    2/25/25
+
+"""
+# Imports
 import numpy as np
 import csv
 import data_validator

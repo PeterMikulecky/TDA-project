@@ -1,3 +1,59 @@
+"""
+TDAVisualizerApp.py
+
+This is the main driver script for the TDA Time Series Visualizer package.
+
+The package offers a user-friendly way for non-specialist researchers to assess 
+whether their time series data might benefit from topological data analysis (TDA).
+
+This driver makes the app available from a simple GUI. For a CLI-driven interface, 
+use the alternative driver, main.py.
+
+Workflow:
+1. Prompt the user to browse to select two CSV files, each containing two columns: 
+    timestep and signal data.
+2. Prompt the user to input parameters for dimension and lag.
+3. Validate the data in the provided files.
+4. Use the dimension and lag parameters to perform delay-embedding of the time 
+    series, producing point clouds.
+5. Subject the point clouds to persistence homology analysis to produce persistence
+    diagrams, highlighting the persistence of topological features across homology 
+    groups (H0: points, H1: holes, H2: volumes).
+6. Compare the persistence diagrams of the two time series by calculating the 
+    Wasserstein distance, normalized against the standard deviation of the 
+    persistence lifetimes of each persistence diagram.
+7. Output five plots, saving them to the source code directory and displaying them
+    within the GUI:
+    - Point cloud for time series 1
+    - Point cloud for time series 2
+    - Persistence diagram for time series 1
+    - Persistence diagram for time series 2
+    - Wasserstein distance normalized against the lifetime standard deviation of 
+        each persistence diagram
+
+Dependencies:
+- data_validator.py: Validates the data in the provided CSV files.
+- delay_embedder.py: Delay-embeds the time series to produce point clouds.
+- persistence_analyzer.py: Analyzes the point clouds using persistence homology 
+    to produce persistence diagrams.
+- visualizer.py: Visualizes the point clouds and persistence diagrams, and 
+    calculates the Wasserstein distance.
+- other python packages from the PSL or installable by pip, as detailed in 
+    requirements.txt.
+
+Example:
+To run the script, from within /TDA-project/src/, use one of the following commands:
+    python TDAVisualizerApp.py
+    python3 TDAVisualizerApp.py
+
+Authors:
+    Peter Mikulecky and Patrick Hudson
+
+Date:
+    2/25/25
+
+"""
+# Imports
 from tkinter import filedialog, messagebox
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
@@ -10,7 +66,16 @@ import visualizer
 import tkinter as tk
 
 class TDAVisualizerApp:
+    """
+    Tkinter GUI for visualizing Topological Data Analysis (TDA) results.
+    """
     def __init__(self, root):
+        """
+        Initializes the TDAVisualizerApp.
+        
+        Args:
+            root (tkinter.Tk): The root Tkinter window.
+        """
         self.root = root
         self.root.title("Topological Data Analysis Visualizer")
         self.root.geometry("800x600")  # Initial size of the window
@@ -66,20 +131,35 @@ class TDAVisualizerApp:
         self.root.grid_columnconfigure(1, weight=1)
 
     def on_frame_configure(self, event):
+        """
+        Updates the scroll region of the canvas when the image frame is resized.
+        
+        Args:
+            event (tkinter.Event): The configuration event.
+        """
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         print(f"Image frame resized: width={self.image_frame.winfo_width()}, height={self.image_frame.winfo_height()}")
 
     def browse_file1(self):
+        """
+        Opens a file dialog to select the first CSV file.
+        """
         self.file1_path = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
         self.file1_entry.delete(0, tk.END)
         self.file1_entry.insert(0, self.file1_path)
 
     def browse_file2(self):
+        """
+        Opens a file dialog to select the second CSV file.
+        """
         self.file2_path = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
         self.file2_entry.delete(0, tk.END)
         self.file2_entry.insert(0, self.file2_path)
 
     def run_analysis(self):
+        """
+        Runs the TDA analysis based on the selected files and parameters.
+        """
         dimension = self.dimension_entry.get()
         lag = self.lag_entry.get()
 
@@ -168,6 +248,12 @@ class TDAVisualizerApp:
         self.message_box.insert(tk.END, "Analysis complete! These plots are also saved to source directory.\n")
 
     def display_image(self, img_path):
+        """
+        Displays an image in the image frame.
+        
+        Args:
+            img_path (str): The path to the image file.
+        """
         try:
             print(f"Loading image from: {img_path}")
             self.root.update_idletasks()
@@ -189,11 +275,23 @@ class TDAVisualizerApp:
             self.message_box.update()
 
     def clear_image_frame(self):
+        """
+        Clears all widgets from the image frame.
+        """
         for widget in self.image_frame.winfo_children():
             widget.destroy()
         self.canvas.config(scrollregion=self.canvas.bbox("all"))
 
     def read_csv_column(self, file_path):
+        """
+        Reads the second column of a CSV file and returns it as a NumPy array.
+        
+        Args:
+            file_path (str): The path to the CSV file.
+        
+        Returns:
+            numpy.ndarray: The second column of the CSV file as a NumPy array, or None if an error occurs.
+        """
         try:
             second_column = []
             with open(file_path, 'r') as file:
