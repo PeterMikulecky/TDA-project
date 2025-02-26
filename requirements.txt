@@ -1,4 +1,4 @@
-# Python version >=3.7
+# Python version >=3.7,<=3.10
 
 giotto_tda>=0.6.2
 giotto-ph>=0.2.1
