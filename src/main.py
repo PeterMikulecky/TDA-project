@@ -127,6 +127,7 @@ def main():
     print("Delay-embedding timeseries 2...\n")
     embedding2 = delay_embedder.DelayEmbedding(timeseries2, dimension, lag).generate_embedding()
 
+    print("Calculating persistence diagrams. UserWarnings are normal and expected. This could take a few minutes...")
     persistence_analysis = persistence_analyzer.PersistenceAnalysis(embedding1, embedding2)
     persistence_analysis.diagrams1 = persistence_analysis.generate_persistence_homology(embedding1)
     persistence_analysis.diagrams2 = persistence_analysis.generate_persistence_homology(embedding2)
