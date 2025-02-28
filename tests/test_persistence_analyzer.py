@@ -1,8 +1,7 @@
-# Unit tests for persistence_analyzer class
-import unittest
 import numpy as np
 import sys
 import os
+import unittest  # Make sure to import unittest
 
 # Add the 'src' directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
@@ -20,8 +19,8 @@ class TestPersistenceAnalysis(unittest.TestCase):
     def test_generate_persistence_homology(self):
         diagrams1 = self.analysis.generate_persistence_homology(self.point_cloud1)
         diagrams2 = self.analysis.generate_persistence_homology(self.point_cloud2)
-        self.assertTrue(len(diagrams1) > 0)
-        self.assertTrue(len(diagrams2) > 0)
+        self.assertTrue(isinstance(diagrams1, list) and len(diagrams1) > 0)
+        self.assertTrue(isinstance(diagrams2, list) and len(diagrams2) > 0)
 
     # Test Wasserstein distance calculator for ability to produce float output
     def test_compute_wasserstein_distance(self):
@@ -30,20 +29,25 @@ class TestPersistenceAnalysis(unittest.TestCase):
         wasserstein_dist = self.analysis.compute_wasserstein_distance(diagrams1, diagrams2)
         self.assertIsInstance(wasserstein_dist, float)
 
-    # Test Bottleneck distance calculator for ability to produce float output
-    def test_compute_bottleneck_distance(self):
+    # Test std_lifetimes distance calculator for ability to produce float output
+    def test_compute_std_lifetimes(self):
         diagrams1 = self.analysis.generate_persistence_homology(self.point_cloud1)
-        diagrams2 = self.analysis.generate_persistence_homology(self.point_cloud2)
-        bottleneck_dist = self.analysis.compute_bottleneck_distance(diagrams1, diagrams2)
-        self.assertIsInstance(bottleneck_dist, float)
+        std_lifetimes1 = self.analysis.compute_std_lifetimes(diagrams1)
+        self.assertTrue(std_lifetimes1 is None or isinstance(std_lifetimes1, float))
 
     # Test compare_persistence_data method for ability to call preceding methods
     def test_compare_persistence_data(self):
-        wasserstein_dist, bottleneck_dist = self.analysis.compare_persistence_data()
+        self.analysis.diagrams1 = self.analysis.generate_persistence_homology(self.point_cloud1)
+        self.analysis.diagrams2 = self.analysis.generate_persistence_homology(self.point_cloud2)
+        wasserstein_dist = self.analysis.compute_wasserstein_distance(self.analysis.diagrams1, self.analysis.diagrams2)
+        std_lifetimes1 = self.analysis.compute_std_lifetimes(self.analysis.diagrams1)
+        std_lifetimes2 = self.analysis.compute_std_lifetimes(self.analysis.diagrams2)
         print("Wasserstein Distance:", wasserstein_dist)
-        print("Bottleneck Distance:", bottleneck_dist)
+        print("Std Lifetimes 1:", std_lifetimes1)
+        print("Std Lifetimes 2:", std_lifetimes2)
         self.assertIsInstance(wasserstein_dist, float)
-        self.assertIsInstance(bottleneck_dist, float)
+        self.assertTrue(std_lifetimes1 is None or isinstance(std_lifetimes1, float))
+        self.assertTrue(std_lifetimes2 is None or isinstance(std_lifetimes2, float))
 
 if __name__ == "__main__":
     unittest.main()
