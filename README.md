@@ -26,9 +26,12 @@ Please direct all such correspondence to pmikule1@asu.edu.
 
 ### Installation:
 The application runs as a Python module which can be accessed by cloning this 
-repository. Python 3.12.3 was the devlopment environment. See INSTALL.md for 
-instructions on cloning the repository, setting up and activating a virtual 
-environment, installing dependencies and running the application.
+repository. Local installations can be run from the CLI or from a simple GUI.
+Alternatively, the CLI version can be run from a Docker container for which
+a Dockerfile is provided within the repository. See INSTALL.md for instructions
+on cloning the repository, setting up and activating a virtual environment, 
+installing dependencies and running the application--or for instructions on
+building the container image and running the container.
 
 ### User-provided time series data:
 The application prompts the user for paths to two time series data files that 
@@ -73,10 +76,25 @@ diagrams (in the H0 homology class), and the Wasserstein algorithm gracefully
 handles these UserWarnings.
 
 ### Output files:
-The application generates five plot files per run. The plot files are in .png 
-format and are automatically saved to the same /TDA-project/src/ directory that 
-contains the main.py script.
+The application generates five plot files per run, in .png formmat. When the 
+app is run locally from the CLI or GUI, the files are automatically saved to 
+the same /TDA-project/src/ directory that contains the main.py and 
+TDAVisualizerApp.py scripts. The GUI additionally displays the images in a 
+scrollable field. When the app is run from a container, the image files are
+saved into a user-selected directory that has been mounted to the container.
 
+### Sample time series data:
+Users new to TDA may benefit from an initial analysis of sample data to 
+get comfortable with the functioning of the app. Two files are available
+within the repository (and the container) for this purpose: sample_wind.csv and
+sample_wind2.csv. From local installs, the paths to these files are:
+```sh
+../sample_wind.csv
+../sample_wind2.csv
+```
+From the container version, the files are accessed directly, simply typing
+their filenames at the prompt. These files both contain wind speed timeseries.
+ 
 #### *Point clouds*
 Two files represent 2D visualizations of the point clouds for each time series. 
 When the dimension parameter selected for delay-embedding is higher than 2, 
